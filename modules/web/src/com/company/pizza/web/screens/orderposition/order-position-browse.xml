@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderPositionBrowse.caption"
+        focusComponent="orderPositionsTable"
+        messagesPack="com.company.pizza.web.screens.orderposition">
+    <data readOnly="true">
+        <collection id="orderPositionsDc"
+                    class="com.company.pizza.entity.OrderPosition">
+            <view extends="_local">
+                <property name="order" view="_minimal"/>
+                <property name="pizza" view="_minimal"/>
+            </view>
+            <loader id="orderPositionsDl">
+                <query>
+                    <![CDATA[select e from pizza_OrderPosition e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderPositionsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="orderPositionsTable"
+                dataLoader="orderPositionsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="orderPositionsTable"
+                    width="100%"
+                    dataContainer="orderPositionsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="order"/>
+                <column id="pizza"/>
+                <column id="amount"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderPositionsTable.create"/>
+                <button id="editBtn" action="orderPositionsTable.edit"/>
+                <button id="removeBtn" action="orderPositionsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

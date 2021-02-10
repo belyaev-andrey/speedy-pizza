@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://pizzaRecipeEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.pizza.web.screens.pizzarecipe">
+    <data>
+        <instance id="pizzaRecipeDc"
+                  class="com.company.pizza.entity.PizzaRecipe">
+            <view extends="_local">
+                <property name="pizza" view="_minimal"/>
+                <property name="ingredient" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="pizzaRecipeDc">
+            <column width="350px">
+                <pickerField id="pizzaField" property="pizza">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <pickerField id="ingredientField" property="ingredient">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField id="amountField" property="amount"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

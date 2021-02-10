@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://pizzaBrowse.caption"
+        focusComponent="pizzasTable"
+        messagesPack="com.company.pizza.web.screens.pizza">
+    <data readOnly="true">
+        <collection id="pizzasDc"
+                    class="com.company.pizza.entity.Pizza">
+            <view extends="_local">
+            </view>
+            <loader id="pizzasDl">
+                <query>
+                    <![CDATA[select e from pizza_Pizza e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="screenLayout"
+            spacing="true">
+        <filter id="filter"
+                applyTo="pizzasTable"
+                dataLoader="pizzasDl">
+            <properties include=".*"/>
+        </filter>
+        <buttonsPanel id="buttonsPanel"
+                      alwaysVisible="true">
+            <button id="createBtn" action="pizzasTable.create"/>
+            <button id="editBtn" action="pizzasTable.edit"/>
+            <button id="removeBtn" action="pizzasTable.remove"/>
+        </buttonsPanel>
+        <hbox id="screenLayout" expand="pizzasTable" width="100%">
+            <groupTable id="pizzasTable"
+                        height="100%"
+                        dataContainer="pizzasDc">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                    <column id="calories"/>
+                    <column id="price"/>
+                </columns>
+                <rowsCount/>
+            </groupTable>
+            <hbox margin="true">
+                <form dataContainer="pizzasDc" height="100%">
+                    <column width="350px">
+                        <textField id="diameterField" property="diameter" editable="false"/>
+                    </column>
+                </form>
+            </hbox>
+        </hbox>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

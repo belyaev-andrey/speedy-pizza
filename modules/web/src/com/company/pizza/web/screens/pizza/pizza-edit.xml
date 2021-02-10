@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://pizzaEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.pizza.web.screens.pizza">
+    <data>
+        <instance id="pizzaDc"
+                  class="com.company.pizza.entity.Pizza">
+            <view extends="_local">
+                <property name="ingredients" view="_minimal">
+                    <property name="pizza" view="_minimal"/>
+                    <property name="ingredient" view="_minimal"/>
+                    <property name="amount"/>
+                </property>
+            </view>
+            <loader/>
+            <collection id="ingredientsDc" property="ingredients"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="ingredientsGrid" spacing="true">
+        <form id="form" dataContainer="pizzaDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <textField id="diameterField" property="diameter"/>
+                <textField id="caloriesField" property="calories"/>
+                <textField id="priceField" property="price"/>
+            </column>
+        </form>
+        <buttonsPanel>
+            <button id="addIngr" action="ingredientsGrid.addIngredient"/>
+            <button id="removeBtn" action="ingredientsGrid.removeIngredient"/>
+        </buttonsPanel>
+        <dataGrid id="ingredientsGrid" dataContainer="ingredientsDc" width="100%" editorEnabled="true">
+            <actions>
+                <action id="addIngredient" icon="PLUS" caption="msg://add.ingredient"/>
+                <action id="removeIngredient" icon="font-icon:MINUS" caption="msg://remove.ingredient"/>
+            </actions>
+            <columns>
+                <column id="ingredient" property="ingredient"/>
+                <column id="amount" property="amount"/>
+            </columns>
+        </dataGrid>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
