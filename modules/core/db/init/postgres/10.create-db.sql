@@ -13,6 +13,7 @@ create table PIZZA_PIZZA (
     DIAMETER integer not null,
     CALORIES integer,
     PRICE decimal(19, 2) not null,
+    IMAGE_ID uuid,
     --
     primary key (ID)
 )^

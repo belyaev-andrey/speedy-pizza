@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://basketScreen.caption"
+        messagesPack="com.company.pizza.web.screens.basket">
+    <data>
+        <keyValueCollection id="basketDc">
+            <properties>
+                <property class="com.company.pizza.entity.Pizza"
+                          name="pizza"/>
+                <property datatype="decimal"
+                          name="count"/>
+                <property name="minus" datatype="string"/>
+            </properties>
+            <loader id="basketDl"/>
+        </keyValueCollection>
+    </data>
+    <dialogMode width="800px" height="600px" closeable="true" modal="true" forceDialog="true"/>
+    <layout expand="basketGrid" height="100%" width="100%">
+        <dataGrid id="basketGrid" dataContainer="basketDc" width="100%">
+            <columns>
+                <column id="pizza" property="pizza" caption="msg://pizza.caption"/>
+                <column id="count" property="count" caption="msg://count.caption"/>
+                <column id="minus" property="minus" caption="msg://operations"/>
+            </columns>
+        </dataGrid>
+    </layout>
+</window>

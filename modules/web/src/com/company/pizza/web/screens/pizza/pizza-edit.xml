@@ -12,6 +12,7 @@
                     <property name="ingredient" view="_minimal"/>
                     <property name="amount"/>
                 </property>
+                <property name="image" view="_minimal"/>
             </view>
             <loader/>
             <collection id="ingredientsDc" property="ingredients"/>
@@ -26,6 +27,7 @@
                 <textField id="diameterField" property="diameter"/>
                 <textField id="caloriesField" property="calories"/>
                 <textField id="priceField" property="price"/>
+                <upload fileStoragePutMode="IMMEDIATE" showFileName="true" id="imageField" property="image"/>
             </column>
         </form>
         <buttonsPanel>

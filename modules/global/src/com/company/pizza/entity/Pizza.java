@@ -1,12 +1,10 @@
 package com.company.pizza.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -39,6 +37,18 @@ public class Pizza extends StandardEntity {
 
     @OneToMany(mappedBy = "pizza")
     private List<PizzaRecipe> ingredients;
+
+    @JoinColumn(name = "IMAGE_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private FileDescriptor image;
+
+    public FileDescriptor getImage() {
+        return image;
+    }
+
+    public void setImage(FileDescriptor image) {
+        this.image = image;
+    }
 
     public List<PizzaRecipe> getIngredients() {
         return ingredients;

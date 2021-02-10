@@ -1,5 +1,8 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="mainMsg://application.caption">
+    <actions>
+        <action id="openBasket"/>
+    </actions>
     <layout expand="horizontalWrap"
             stylename="c-sidemenu-responsive"
             responsive="true">
@@ -46,8 +49,7 @@
                                align="MIDDLE_CENTER"
                                scaleMode="SCALE_DOWN"/>
                         <hbox width="100%" margin="false,true,false,true">
-                            <linkButton id="basketLabel" caption="msg://basket.label" icon="font-icon:SHOPPING_BASKET"
-                            />
+                            <linkButton id="basketLabel" caption="msg://basket.label" icon="font-icon:SHOPPING_BASKET"/>
                         </hbox>
                         <sideMenu id="sideMenu"
                                   sidePanel="sideMenuPanel"

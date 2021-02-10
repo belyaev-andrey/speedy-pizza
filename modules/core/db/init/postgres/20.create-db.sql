@@ -1,5 +1,7 @@
 -- begin PIZZA_PIZZA
+alter table PIZZA_PIZZA add constraint FK_PIZZA_PIZZA_ON_IMAGE foreign key (IMAGE_ID) references SYS_FILE(ID)^
 create unique index IDX_PIZZA_PIZZA_UK_NAME on PIZZA_PIZZA (NAME) where DELETE_TS is null ^
+create index IDX_PIZZA_PIZZA_ON_IMAGE on PIZZA_PIZZA (IMAGE_ID)^
 -- end PIZZA_PIZZA
 -- begin PIZZA_ORDER_POSITION
 alter table PIZZA_ORDER_POSITION add constraint FK_PIZZA_ORDER_POSITION_ON_ORDER foreign key (ORDER_ID) references PIZZA_ORDER(ID)^

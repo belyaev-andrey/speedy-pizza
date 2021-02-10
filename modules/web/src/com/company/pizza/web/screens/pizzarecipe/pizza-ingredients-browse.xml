@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://pizzaIngredientsBrowse.caption"
+        focusComponent="pizzaRecipesTable"
+        messagesPack="com.company.pizza.web.screens.pizzarecipe">
+    <data readOnly="true">
+        <collection id="pizzaRecipesDc"
+                    class="com.company.pizza.entity.PizzaRecipe">
+            <view extends="_local">
+                <property name="ingredient" view="_minimal"/>
+            </view>
+            <loader id="pizzaRecipesDl">
+                <query>
+                    <![CDATA[select e from pizza_PizzaRecipe e]]>
+                    <condition>
+                        <c:jpql>
+                            <c:where>e.pizza = :pizza or :pizza is null</c:where>
+                        </c:jpql>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="800px"
+                width="600px" modal="true" closeable="true" resizable="true"/>
+    <layout expand="pizzaRecipesTable"
+            spacing="true">
+        <groupTable id="pizzaRecipesTable"
+                    width="100%"
+                    dataContainer="pizzaRecipesDc">
+            <columns>
+                <column id="ingredient"/>
+                <column id="amount"/>
+            </columns>
+            <rowsCount/>
+        </groupTable>
+    </layout>
+</window>

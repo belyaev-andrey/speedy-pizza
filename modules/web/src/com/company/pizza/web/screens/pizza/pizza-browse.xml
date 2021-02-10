@@ -39,6 +39,8 @@
                     <action id="create" type="create"/>
                     <action id="edit" type="edit"/>
                     <action id="remove" type="remove"/>
+                    <action id="showRecipe" caption="msg://show.recipe" icon="FILE_TEXT_O"/>
+                    <action id="orderPizza" caption="msg://order.pizza" icon="SHOPPING_BASKET"/>
                 </actions>
                 <columns>
                     <column id="name"/>
@@ -48,11 +50,15 @@
                 <rowsCount/>
             </groupTable>
             <hbox margin="true">
-                <form dataContainer="pizzasDc" height="100%">
-                    <column width="350px">
-                        <textField id="diameterField" property="diameter" editable="false"/>
-                    </column>
-                </form>
+                <vbox spacing="true">
+                    <image id="pizzaImage" width="200px" height="200px" align="TOP_CENTER"/>
+                    <textField id="diameterField" dataContainer="pizzasDc" property="diameter" editable="false"
+                               align="TOP_CENTER" width="100%"/>
+                    <textField id="caloriesField" dataContainer="pizzasDc" property="calories" editable="false"
+                               align="TOP_CENTER" width="100%"/>
+                    <linkButton id="RecipeBtn" action="pizzasTable.showRecipe" align="TOP_CENTER" width="100%"/>
+                    <button id="orderButton" align="TOP_CENTER" width="100%" action="pizzasTable.orderPizza"/>
+                </vbox>
             </hbox>
         </hbox>
         <hbox id="lookupActions" spacing="true" visible="false">
