@@ -1,4 +1,4 @@
-package com.company.pizza.web.screens.main;
+package com.company.pizza.data;
 
 import com.company.pizza.entity.Pizza;
 
@@ -31,5 +31,12 @@ public class Basket implements Serializable {
         return basket.entrySet();
     }
 
+    public void clear() {
+        basket.clear();
+    }
+
+    public boolean isEmpty() {
+        return basket.isEmpty();
+    }
 
 }

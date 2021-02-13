@@ -3,6 +3,7 @@ package com.company.pizza.entity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@PublishEntityChangedEvents
 @Table(name = "PIZZA_ORDER")
 @Entity(name = "pizza_Order")
 @NamePattern("%s %s|orderNo,status")
@@ -89,6 +91,8 @@ public class Order extends StandardEntity {
 
     @PostConstruct
     public void postConstruct() {
+        status = OrderStatus.CREATED.getId();
+        created = LocalDateTime.now();
         totalAmount = BigDecimal.ZERO;
     }
 }

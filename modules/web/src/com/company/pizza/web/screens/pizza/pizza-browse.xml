@@ -8,6 +8,7 @@
         <collection id="pizzasDc"
                     class="com.company.pizza.entity.Pizza">
             <view extends="_local">
+                <property name="image" view="_minimal"/>
             </view>
             <loader id="pizzasDl">
                 <query>
@@ -50,14 +51,21 @@
                 <rowsCount/>
             </groupTable>
             <hbox margin="true">
-                <vbox spacing="true">
-                    <image id="pizzaImage" width="200px" height="200px" align="TOP_CENTER"/>
-                    <textField id="diameterField" dataContainer="pizzasDc" property="diameter" editable="false"
-                               align="TOP_CENTER" width="100%"/>
-                    <textField id="caloriesField" dataContainer="pizzasDc" property="calories" editable="false"
-                               align="TOP_CENTER" width="100%"/>
-                    <linkButton id="RecipeBtn" action="pizzasTable.showRecipe" align="TOP_CENTER" width="100%"/>
-                    <button id="orderButton" align="TOP_CENTER" width="100%" action="pizzasTable.orderPizza"/>
+                <vbox spacing="true" width="100%" expand="buttonsBox">
+                    <groupBox width="100%" caption="msg://pizza.data" spacing="true">
+                        <image id="pizzaImage" width="200px" height="200px" scaleMode="CONTAIN"
+                               align="TOP_CENTER" dataContainer="pizzasDc" property="image"/>
+                        <textField id="diameterField" dataContainer="pizzasDc" property="diameter" editable="false"
+                                   align="TOP_CENTER" width="100%" caption="msg://pizza.diameter"/>
+                        <textField id="caloriesField" dataContainer="pizzasDc" property="calories" editable="false"
+                                   align="TOP_CENTER" width="100%" caption="msg://pizza.calories"/>
+                    </groupBox>
+                    <vbox id="buttonsBox" width="100%" spacing="true" margin="true,false,true,false"
+                          align="TOP_CENTER">
+                        <button id="RecipeBtn" action="pizzasTable.showRecipe" width="100%" align="MIDDLE_CENTER"/>
+                        <button id="orderButton" width="100%" action="pizzasTable.orderPizza"
+                                align="MIDDLE_CENTER"/>
+                    </vbox>
                 </vbox>
             </hbox>
         </hbox>

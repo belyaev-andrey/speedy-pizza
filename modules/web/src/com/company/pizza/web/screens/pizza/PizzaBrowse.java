@@ -1,8 +1,9 @@
 package com.company.pizza.web.screens.pizza;
 
-import com.company.pizza.web.events.PizzaInBasketEvent;
+import com.company.pizza.web.events.AddPizzaEvent;
 import com.company.pizza.web.screens.pizzarecipe.PizzaIngredientsBrowse;
 import com.haulmont.cuba.core.global.Events;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.GroupTable;
@@ -26,6 +27,10 @@ public class PizzaBrowse extends StandardLookup<Pizza> {
     private UserSession userSession;
     @Inject
     private Events events;
+    @Inject
+    private Notifications notifications;
+    @Inject
+    private MessageBundle messageBundle;
 
     @Subscribe("pizzasTable.showRecipe")
     public void onPizzasTableShowRecipe(Action.ActionPerformedEvent event) {
@@ -45,7 +50,7 @@ public class PizzaBrowse extends StandardLookup<Pizza> {
     @Subscribe("pizzasTable.orderPizza")
     public void onPizzasTableOrderPizza(Action.ActionPerformedEvent event) {
         pizzasTable.getSelected().forEach(p -> {
-            events.publish(new PizzaInBasketEvent(this, p));
+            events.publish(new AddPizzaEvent(this, p));
         });
     }
 

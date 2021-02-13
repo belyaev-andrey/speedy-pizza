@@ -8,7 +8,9 @@
                   class="com.company.pizza.entity.Order">
             <view extends="_local">
                 <property name="positions" view="_local">
-                    <property name="pizza" view="_minimal"/>
+                    <property name="pizza" view="_minimal">
+                        <property name="price"/>
+                    </property>
                     <property name="order" view="_minimal"/>
                 </property>
                 <property name="delivery" view="_local">
@@ -21,44 +23,56 @@
             <loader/>
         </instance>
     </data>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="editActions" spacing="true">
-        <hbox spacing="true">
-            <form id="form" dataContainer="orderDc">
-                <column width="350px">
-                    <textField id="orderNoField" property="orderNo" editable="false"/>
-                    <dateField id="createdField" property="created"/>
-                    <lookupField id="statusField" property="status"/>
-                    <textField id="totalAmountField" property="totalAmount" editable="false"/>
-                </column>
-            </form>
-            <form id="deliveryForm" dataContainer="deliveryDc">
-                <column width="350px">
-                    <textField id="cityField" property="city"/>
-                    <textField id="streetField" property="street"/>
-                    <textField id="nameField" property="name"/>
-                    <textField id="phoneField" property="phoneNum"/>
-                </column>
-            </form>
-        </hbox>
-        <buttonsPanel>
-            <button id="addNewPositionBtn" action="positionsGrid.addNewPosition"/>
-            <button id="removePositionBtn" action="positionsGrid.removePosition"/>
-        </buttonsPanel>
-        <dataGrid id="positionsGrid" dataContainer="positionsDc" width="100%" editorEnabled="true">
-            <actions>
-                <action id="addNewPosition" icon="PLUS" caption="msg://add.to.order"/>
-                <action id="removePosition" icon="MINUS" caption="msg://remove.from.order"/>
-            </actions>
-            <columns>
-                <column id="pizza" property="pizza"/>
-                <column id="amount" property="amount"/>
-            </columns>
-        </dataGrid>
-        <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
-        </hbox>
+    <dialogMode height="AUTO"
+                width="920px" forceDialog="true"/>
+    <layout>
+        <vbox expand="editActions" spacing="true">
+            <vbox spacing="true" width="100%">
+                <buttonsPanel>
+                    <label value="msg://order.no" stylename="huge"/>
+                    <label id="orderNumber" dataContainer="orderDc" property="orderNo" stylename="huge"/>
+                </buttonsPanel>
+                <dataGrid id="positionsGrid" dataContainer="positionsDc" editorEnabled="true" width="100%">
+                    <actions>
+                        <action id="addNewPosition" icon="PLUS" caption="msg://add.to.order"/>
+                        <action id="removePosition" icon="MINUS" caption="msg://remove.from.order"/>
+                    </actions>
+                    <columns>
+                        <column id="pizza" property="pizza"/>
+                        <column id="amount" property="amount"/>
+                    </columns>
+                </dataGrid>
+                <hbox spacing="true" width="100%">
+                    <buttonsPanel align="MIDDLE_LEFT">
+                        <button id="addNewPositionBtn" action="positionsGrid.addNewPosition"/>
+                        <button id="removePositionBtn" action="positionsGrid.removePosition"/>
+                    </buttonsPanel>
+                    <buttonsPanel align="MIDDLE_RIGHT">
+                        <label value="msg://total.amount" stylename="huge"/>
+                        <label id="totalAmountField" dataContainer="orderDc" property="totalAmount" stylename="huge"/>
+                    </buttonsPanel>
+                </hbox>
+            </vbox>
+            <hbox spacing="true">
+                <form id="form" dataContainer="orderDc">
+                    <column width="350px">
+                        <dateField id="createdField" property="created"/>
+                        <lookupField id="statusField" property="status"/>
+                    </column>
+                </form>
+                <form id="deliveryForm" dataContainer="deliveryDc">
+                    <column width="350px">
+                        <textField id="cityField" property="city"/>
+                        <textField id="streetField" property="street"/>
+                        <textField id="nameField" property="name"/>
+                        <textField id="phoneField" property="phoneNum"/>
+                    </column>
+                </form>
+            </hbox>
+            <hbox id="editActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+            </hbox>
+        </vbox>
     </layout>
 </window>

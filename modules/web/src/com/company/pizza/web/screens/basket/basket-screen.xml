@@ -15,13 +15,24 @@
         </keyValueCollection>
     </data>
     <dialogMode width="800px" height="600px" closeable="true" modal="true" forceDialog="true"/>
-    <layout expand="basketGrid" height="100%" width="100%">
-        <dataGrid id="basketGrid" dataContainer="basketDc" width="100%">
+    <layout expand="basketGrid" height="100%" width="100%" spacing="true">
+        <dataGrid id="basketGrid" dataContainer="basketDc" width="100%" selectionMode="NONE" settingsEnabled="false"
+                  frozenColumnCount="3">
+            <actions>
+                <action id="makeOrder" icon="font-icon:THUMBS_UP" caption="msg://make.order"/>
+                <action id="clear" icon="TRASH" caption="msg://clear.basket"/>
+                <action id="continueShopping" caption="msg://continue.shopping" icon="font-icon:SHOPPING_CART"/>
+            </actions>
             <columns>
                 <column id="pizza" property="pizza" caption="msg://pizza.caption"/>
                 <column id="count" property="count" caption="msg://count.caption"/>
                 <column id="minus" property="minus" caption="msg://operations"/>
             </columns>
         </dataGrid>
+        <buttonsPanel align="BOTTOM_CENTER">
+            <button id="makeOrder" action="basketGrid.makeOrder"/>
+            <button id="clearBasket" action="basketGrid.clear"/>
+            <button id="continueShopping" action="basketGrid.continueShopping"/>
+        </buttonsPanel>
     </layout>
 </window>

@@ -49,7 +49,11 @@
                                align="MIDDLE_CENTER"
                                scaleMode="SCALE_DOWN"/>
                         <hbox width="100%" margin="false,true,false,true">
-                            <linkButton id="basketLabel" caption="msg://basket.label" icon="font-icon:SHOPPING_BASKET"/>
+                            <linkButton id="basketLabel"
+                                        caption="msg://basket.label"
+                                        icon="font-icon:SHOPPING_BASKET"
+                                        css="color: white"
+                            />
                         </hbox>
                         <sideMenu id="sideMenu"
                                   sidePanel="sideMenuPanel"

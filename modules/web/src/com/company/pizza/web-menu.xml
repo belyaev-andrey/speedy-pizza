@@ -3,8 +3,11 @@
     <menu id="application-pizza" insertBefore="administration" caption="mainMsg://menu_config.application-pizza">
         <item screen="pizza_Pizza.browse" caption="mainMsg://menu_config.pizza_Pizza.browse"/>
         <item screen="pizza_Order.browse" caption="mainMsg://menu_config.pizza_Order.browse"/>
+    </menu>
+    <menu id="pizzaAdmin" caption="mainMsg://pizza.administration" insertAfter="application-pizza">
         <item screen="pizza_PizzaRecipe.browse" caption="mainMsg://menu_config.pizza_PizzaRecipe.browse"/>
         <item screen="pizza_Ingredient.browse" caption="mainMsg://menu_config.pizza_Ingredient.browse"/>
         <item screen="pizza_OrderPosition.browse" caption="mainMsg://menu_config.pizza_OrderPosition.browse"/>
+        <item screen="pizza_Payment.browse" caption="mainMsg://menu_config.pizza_Payment.browse"/>
     </menu>
 </menu-config>

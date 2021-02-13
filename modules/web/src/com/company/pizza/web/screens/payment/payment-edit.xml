@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://paymentEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.pizza.web.screens.payment">
+    <data>
+        <instance id="paymentDc"
+                  class="com.company.pizza.entity.Payment">
+            <view extends="_local">
+                <property name="order" view="_minimal">
+                    <property name="created"/>
+                </property>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="ordersDc" class="com.company.pizza.entity.Order" view="_minimal">
+            <loader id="ordersDl">
+                <query>
+                    <![CDATA[select e from pizza_Order e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="paymentDc">
+            <column width="350px">
+                <lookupPickerField id="orderField" optionsContainer="ordersDc" property="order"/>
+                <textField id="amountField" property="amount"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

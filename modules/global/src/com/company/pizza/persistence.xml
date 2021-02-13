@@ -8,5 +8,6 @@
         <class>com.company.pizza.entity.Delivery</class>
         <class>com.company.pizza.entity.Ingredient</class>
         <class>com.company.pizza.entity.PizzaRecipe</class>
+        <class>com.company.pizza.entity.Payment</class>
     </persistence-unit>
 </persistence>

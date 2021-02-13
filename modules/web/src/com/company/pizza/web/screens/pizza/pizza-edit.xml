@@ -27,7 +27,13 @@
                 <textField id="diameterField" property="diameter"/>
                 <textField id="caloriesField" property="calories"/>
                 <textField id="priceField" property="price"/>
-                <upload fileStoragePutMode="IMMEDIATE" showFileName="true" id="imageField" property="image"/>
+            </column>
+            <column width="100px">
+                <image id="imageFieldComponent"
+                       scaleMode="CONTAIN"
+                       property="image" width="100px" height="100px" caption=""/>
+                <upload fileStoragePutMode="IMMEDIATE"
+                        showFileName="false" id="imageField" property="image" caption=""/>
             </column>
         </form>
         <buttonsPanel>

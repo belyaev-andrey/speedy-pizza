@@ -4,7 +4,7 @@ import com.company.pizza.entity.Pizza;
 import com.haulmont.cuba.gui.events.UiEvent;
 import org.springframework.context.ApplicationEvent;
 
-public class PizzaInBasketEvent extends ApplicationEvent implements UiEvent {
+public class AddPizzaEvent extends ApplicationEvent implements UiEvent {
 
 
     private final Pizza pizza;
@@ -15,7 +15,7 @@ public class PizzaInBasketEvent extends ApplicationEvent implements UiEvent {
      * @param source the object on which the event initially occurred or with
      *               which the event is associated (never {@code null})
      */
-    public PizzaInBasketEvent(Object source, Pizza pizza) {
+    public AddPizzaEvent(Object source, Pizza pizza) {
         super(source);
         this.pizza = pizza;
     }

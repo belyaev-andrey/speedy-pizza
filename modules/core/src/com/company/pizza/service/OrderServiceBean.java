@@ -1,20 +1,20 @@
 package com.company.pizza.service;
 
+import com.company.pizza.data.Basket;
 import com.company.pizza.entity.Delivery;
 import com.company.pizza.entity.Order;
 import com.company.pizza.entity.OrderPosition;
 import com.company.pizza.entity.Pizza;
 import com.haulmont.cuba.core.app.UniqueNumbersAPI;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.LoadContext;
+import com.haulmont.cuba.core.entity.Entity;
+import com.haulmont.cuba.core.global.*;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service(OrderService.NAME)
 public class OrderServiceBean implements OrderService {
@@ -23,6 +23,27 @@ public class OrderServiceBean implements OrderService {
     private UniqueNumbersAPI uniqueNumbersAPI;
     @Inject
     private DataManager dataManager;
+    @Inject
+    private EntityStates entityStates;
+
+    @Override
+    public Order prepareOrderFromBasket(Basket basket) {
+        final Order order = dataManager.create(Order.class);
+        order.setOrderNo(generateNumber());
+        List<OrderPosition> positions = basket.getEntries().stream().map(e -> {
+            OrderPosition position = dataManager.create(OrderPosition.class);
+            position.setOrder(order);
+            position.setPizza(e.getKey());
+            position.setAmount(e.getValue());
+            return position;
+        }).collect(Collectors.toList());
+        order.setPositions(positions);
+        Collection<Entity<UUID>> entitiesToSave = new ArrayList<>(positions.size()+1);
+        entitiesToSave.add(order);
+        entitiesToSave.addAll(positions);
+
+        return dataManager.commit(entitiesToSave.toArray(new Entity[]{})).get(order);
+    }
 
     @Override
     public BigDecimal calculateCost(Order order) {
@@ -37,7 +58,7 @@ public class OrderServiceBean implements OrderService {
 
     private int calculateDiscount(Order order) {
         int discount = 0;
-        if (order.getDelivery().getEmail() != null) {
+        if (order.getDelivery() != null && order.getDelivery().getEmail() != null) {
             discount = 10;
             if (getOrdersCount(order.getDelivery().getEmail()) > 100) {
                 discount = 20;
@@ -69,7 +90,13 @@ public class OrderServiceBean implements OrderService {
         BigDecimal cost = BigDecimal.ZERO;
         if (positionList != null) {
             for (OrderPosition p : positionList) {
-                cost = cost.add(p.getPizza().getPrice().multiply(BigDecimal.valueOf(p.getAmount())));
+                Pizza pizza = p.getPizza();
+                if (pizza != null) {
+                    if (!entityStates.isLoaded(pizza, "price")) {
+                        pizza = dataManager.reload(pizza, View.LOCAL);
+                    }
+                    cost = cost.add(pizza.getPrice().multiply(BigDecimal.valueOf(p.getAmount())));
+                }
             }
         }
         return cost;
