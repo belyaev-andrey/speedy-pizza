@@ -28,7 +28,7 @@
                 dataLoader="paymentsDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="paymentsTable"
+        <dataGrid id="paymentsTable"
                     width="100%"
                     dataContainer="paymentsDc">
             <actions>
@@ -37,8 +37,8 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="order"/>
-                <column id="amount"/>
+                <column id="order" property="order"/>
+                <column id="amount" property="amount"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
@@ -47,7 +47,7 @@
                 <button id="editBtn" action="paymentsTable.edit"/>
                 <button id="removeBtn" action="paymentsTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </dataGrid>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
